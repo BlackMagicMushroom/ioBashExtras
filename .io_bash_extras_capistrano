@@ -1,0 +1,33 @@
+## -- capistrano/capifony tools -- ##
+function capd {
+    if [ -n "${1}" ]; then
+      application="${1}"
+    else
+      application="dev"
+    fi
+  cap "${application}" deploy
+}
+function capds {
+    if [ -n "${1}" ]; then
+      application="${1}"
+    else
+      application="dev"
+    fi
+  cap "${application}" deploy:setup
+}
+function capdc {
+    if [ -n "${1}" ]; then
+      application="${1}"
+    else
+      application="dev"
+    fi
+  cap "${application}" deploy:cold
+}
+function capdr {
+    if [ -n "${1}" ]; then
+      application="${1}"
+    else
+      application="dev"
+    fi
+  cap "${application}" deploy:rollback
+}

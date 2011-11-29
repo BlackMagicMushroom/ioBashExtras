@@ -1,0 +1,86 @@
+# -- git -- ##
+
+# @name gst
+# @author Jeremy Grier <jeremy.grier@iostudo.com>
+# @description Will call git status for the current directory
+function glmine {
+  #defaults
+  # @author
+  if [ -n "${1}" ]; then
+    author="${1}"
+  else
+    author="$( git config --global --get user.email )"
+  fi
+    git log --author=${author} .
+}
+function gfo {
+  git fetch origin
+}
+function gst {
+  git status .
+  git stash list
+}
+function gpo {
+  if [ -n "${1}" ]; then
+    branch_choice="${1}"
+  else
+    ## - ask option to use master as default
+    exit 127
+  fi
+  git pull origin "${branch_choice}"
+}
+function gaa {
+  git add --all
+}
+## ** git cleanup functions ** ##
+#**
+ #
+ # git clean checkout deleted items
+ # cleans all of the files in git's staging area ( labeled deleted: )
+ # 
+ ##
+function gccd {
+  git checkout -- $( gst | grep "deleted:" | rev | cut -f 1 -d " " | rev )
+}
+#**
+ #
+ # git clean checkout modified items
+ # cleans all of the files in git's staging area ( labeled modified: )
+ # 
+ ##
+function gccm {
+  git checkout -- $( gst | grep "modified:" | rev | cut -f 1 -d " " | rev )
+}
+#**
+ #
+ # git clean checkout new file items
+ # cleans all of the files in git's staging area ( labeled "new file:" )
+ # 
+ ##
+function gccn {
+  git checkout -- $( gst | grep "new file:" | rev | cut -f 1 -d ":" | rev | sed -e 's/^[ ]*\(.*\)/\1/' | grep Data | sed -e 's/[ ]/\\&/g' )
+}
+#**
+ #
+ # git clean checkout new file items
+ # cleans all of the files in git's staging area ( labeled "new file:" )
+ # 
+ ##
+function grcn {
+  git reset HEAD $( gst | grep "new file:" | rev | cut -f 1 -d ":" | rev | sed -e 's/^[ ]*\(.*\)/\1/' | grep Data | sed -e 's/[ ]/\\&/g' )
+}
+
+#**
+ #
+ # git clean checkout all items (using above functions) *equivalent to "git checkout ."
+ # cleans all of the files in git's staging area ( all )
+ # 
+ ##
+function gcc {
+  gccd
+  gccm
+  gccn
+}
+
+## -- function git-diff-head -- ##
+function gdh { git diff HEAD "${1}" ; }  

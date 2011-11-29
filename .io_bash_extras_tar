@@ -1,0 +1,13 @@
+# -- tar commands -- #
+function tarzc {
+  tar -zcvf "${1}"
+}
+function tarze {
+  tar -zxvf "${1}"
+}
+function tarc {
+  tar -cvf "${1}"
+}
+function tare {
+  tar -xvf "${1}"
+}

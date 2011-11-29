@@ -1,0 +1,30 @@
+# @name invim
+# @author Jeremy Grier <jeremy.grier@iostudo.com>
+# @description This function will show you if you are running vim or a normal shell
+function invim {
+	if [ $( env | grep -c 'VIMRUNTIME' ) -gt "0" ]; then
+		exit;
+	else
+		if [ ${#} -gt "0" ]; then
+			vim -p ${@}
+		else
+			vim
+		fi
+	fi
+}
+
+# @name vims
+# @author Jeremy Grier <jeremy.grier@iostudo.com>
+# @description This function open vim with the specified session or the default session specified here
+function vims {
+
+  if [ -n "${1}" ]; then
+    vimSession="${1}"
+  else
+    vimSession='$HOME/vimsession.vim'
+  fi
+
+  vim -S "${vimSession}"
+
+}
+

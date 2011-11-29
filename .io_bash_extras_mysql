@@ -1,0 +1,38 @@
+#  -- Database Functions -- ##
+function mydb {
+  if [ -n "${1}" ]; then
+    db_user="${1}"
+    echo -n "Usage: ${0} db_user db_host db_database"
+  else
+    db_user=root
+  fi
+  if [ -n "${2}" ]; then
+    db_host="${2}"
+  else
+    db_host=localhost
+  fi
+  if [ -n "${3}" ]; then
+    db_name="${3}"
+  else
+    db_name=""
+  fi
+  mysql -h"$db_host" -u$db_user -p "${db_name}"
+}
+
+function mdfw {
+  if [ -z "${1}" ]; then
+    echo "Usage: ${0} 'database_backup_sql_file'"
+  else
+    # -- if successfull  
+    mysqldump -uroot -p fourwalls_magento > ${1}
+  fi
+}
+function dbdump {
+  if [ -z "${1}" ] || [ -z "${2}" ]; then
+    echo "Usage: ${0} 'database_name' 'database_backup_sql_file'"
+  else
+    # -- if successfull  
+    mysqldump -uroot -p ${1} > ${2}
+  fi
+}
+

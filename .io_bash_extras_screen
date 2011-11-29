@@ -1,0 +1,33 @@
+#  functions to be used with screen
+#  
+#  -- Work modes -- #
+##
+ #
+ # screen for me 
+ #
+ ##
+function sfm {
+  if [ -n "${1}" ]; then
+    screen_name="${1}"
+  else
+    screen_name=""
+  fi
+  screen -t "${1}"
+}
+function srd {
+  if [ -n "${1}" ]; then
+    screen_name="${1}"
+  else
+    screen_name="workflow"
+  fi
+  screen -O -R -S "${screen_name}" -c ~/.screenrc-development
+}
+function srw {
+  screen -O -S workflow -c ~/.screenrc-workflow
+}
+function srwk {
+  screen -O -S working -c ~/.screenrc-working
+}
+function sls {
+  screen -list
+}
