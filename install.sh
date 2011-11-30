@@ -20,7 +20,7 @@ SOURCEFUNCTION
 if [ -f "bash_functions" ]; then
   # -- symlink the file to $HOME/.bash_functions
   echo -e "Adding symlink to bash_functions file in the home directory"
-  ln -sf "$( pwd )/bash_functions" $HOME/.bash_functions
+  ln -sfb "$( pwd )/bash_functions" $HOME/.bash_functions
 fi
 
 if [ -f "$bashrcfile" ]; then
