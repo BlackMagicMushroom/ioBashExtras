@@ -20,7 +20,13 @@ SOURCEFUNCTION
 if [ -f "bash_functions" ]; then
   # -- symlink the file to $HOME/.bash_functions
   echo -e "Adding symlink to bash_functions file in the home directory"
-  ln -sfb "$( pwd )/bash_functions" $HOME/.bash_functions
+  # -- if bash_functions exists rename it to 
+  # .bash_functions_private (provided the file 
+  # doesn't already exist
+  if [[ -f "$HOME/.bash_functions" && ! -f "$HOME/.bash_functions_private" ]]; then
+      mv $HOME/.bash_functions $HOME/.bash_functions_private
+  fi
+      ln -sfb "$( pwd )/bash_functions" $HOME/.bash_functions
 fi
 
 if [ -f "$bashrcfile" ]; then
