@@ -3,9 +3,12 @@
 
 # -- include private function -- #
 function include_private_functions {
-   bash_private_functions_file="~/.bash_functions_private"
-   if [ -f "$bash_private_functions_file" ];then
-     source "$bash_private_functions_file" 
+   bash_private_functions_file="$HOME/.bash_functions_private"
+   if [ -f "${bash_private_functions_file}" ];then
+     source "${bash_private_functions_file}" 
+     echo "${bash_private_functions_file}" 
+   else
+    echo "Private functions file not found"
    fi
 }
 function include_function_file {
@@ -16,7 +19,7 @@ function include_function_file {
    fi
 
 }
-
+include_private_functions
 include_function_file "/$HOME/ioBashExtras/.io_bash_extras_screen"
 include_function_file "/$HOME/ioBashExtras/.io_bash_extras_git"
 include_function_file "/$HOME/ioBashExtras/.io_bash_extras_mysql"
