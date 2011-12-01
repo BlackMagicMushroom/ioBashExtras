@@ -6,7 +6,7 @@ function include_private_functions {
    bash_private_functions_file="$HOME/.bash_functions_private"
    if [ -f "${bash_private_functions_file}" ];then
      source "${bash_private_functions_file}" 
-     echo "${bash_private_functions_file}" 
+     echo "Included: ${bash_private_functions_file}" 
    else
     echo "Private functions file not found"
    fi
