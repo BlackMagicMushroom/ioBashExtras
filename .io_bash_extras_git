@@ -20,6 +20,16 @@ function gst {
   git status .
   git stash list
 }
+
+function gco {
+  if [ -n "${1}" ]; then
+    branch_choice="${1}"
+  else
+    branch_choice="master"
+  fi
+git checkout "${branch_choice}"
+}
+
 function gpo {
   if [ -n "${1}" ]; then
     branch_choice="${1}"
@@ -84,3 +94,14 @@ function gcc {
 
 ## -- function git-diff-head -- ##
 function gdh { git diff HEAD "${1}" ; }  
+
+
+function gmo {
+  if [ -n "${1}" ]; then
+    branch="${1}"
+  else
+    branch="develop"
+  fi
+  ## -- run command -- ##
+  git merge origin/${branch}
+}

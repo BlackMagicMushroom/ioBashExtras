@@ -1,0 +1,3 @@
+function findl {
+  find . -name "${1}" -exec grep -lc "${2}" {} \;
+}

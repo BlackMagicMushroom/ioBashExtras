@@ -22,6 +22,7 @@ function include_function_file {
 include_function_file "/$HOME/ioBashExtras/.io_bash_extras_screen"
 include_function_file "/$HOME/ioBashExtras/.io_bash_extras_git"
 include_function_file "/$HOME/ioBashExtras/.io_bash_extras_mysql"
+include_function_file "/$HOME/ioBashExtras/.io_bash_extras_find"
 include_function_file "/$HOME/ioBashExtras/.io_bash_extras_grep"
 include_function_file "/$HOME/ioBashExtras/.io_bash_extras_capistrano"
 include_function_file "/$HOME/ioBashExtras/.io_bash_extras_tar"
