@@ -105,3 +105,14 @@ function gmo {
   ## -- run command -- ##
   git merge origin/${branch}
 }
+
+## -- function git log --name-only -- ##
+function glno {
+  git log --name-only
+}
+
+
+## -- branch functions -- ##
+function gba {
+  git branch -ar
+}

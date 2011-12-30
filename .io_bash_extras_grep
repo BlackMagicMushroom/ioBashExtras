@@ -1,22 +1,28 @@
 # -- Grep and Find Tools -- #
-exclude_list='--exclude="*.sql" --exclude-dir=".git" --exclude-dir=".svn" --exclude-dir="cache" --exclude-dir="log" --exclude-dir="production_sql"'
+exclude_list='--exclude="*.sql" --exclude-dir="\.git" --exclude-dir="\.svn" --exclude-dir="cache" --exclude-dir="log" --exclude-dir="\./var" --exclude-dir="production_sql" --exclude="ctag.vim"'
 function grepu {
    echo "Grep for: ${1}"
-   grep -Rlwe --color=auto --exclude="*.sql" --exclude-dir=".git" --exclude-dir=".svn" --exclude-dir="cache" --exclude-dir="log" --exclude-dir="production_sql" "(class|function) ${1}" .
+   cmd="grep -Rlwe --color=auto $exclude_list '(class|function) ${1}' ."
+   $cmd
 }
 function grepd { 
   echo "Grep for: ${1}"
-  grep -R --color=auto --exclude="*.sql" --exclude-dir=".git" --exclude-dir=".svn" --exclude-dir="cache" --exclude-dir="log" --exclude-dir="production_sql" "${1}" .
+  cmd="grep -R --color=auto $exclude_list ${1} ."
+  $cmd  
 }
 function grepe {
   echo "Grep for: ${1}"
-  grep -Re --color=auto --exclude="*.sql" --exclude-dir=".git" --exclude-dir=".svn" --exclude-dir="cache" --exclude-dir="log" --exclude-dir="production_sql" "${1}" .
+  cmd="grep -Re --color=auto $exclude_list ${1} ."
+  $cmd  
 }
 function grepdvim { 
   echo "Grep for: ${1}"
-  vim -p $( grep -Rl --color=auto --exclude="*.sql" --exclude-dir=".git" --exclude-dir=".svn" --exclude-dir="cache" --exclude-dir="log" --exclude-dir="production_sql" "${1}" .)
+  cmd="vim -p $( grep -Rl --color=auto ${exclude_tags} '${1}' .)"
+  $cmd
 }
 function grepdl { 
   echo "Grep for: ${1}"
-  grep -Rl --color=auto --exclude="*.sql" --exclude-dir=".git" --exclude-dir=".svn" --exclude-dir="cache" --exclude-dir="log" --exclude-dir="production_sql" "${1}" .
+  cmd="grep -Rl --color=auto ${exclude_tags} --exclude='*.sql' --exclude-dir='.git' --exclude-dir='.svn' --exclude-dir='cache' --exclude-dir='log' --exclude-dir='production_sql' \"${1}\" ."
+  echo $cmd
+  $cmd
 }
