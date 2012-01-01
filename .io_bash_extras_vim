@@ -15,7 +15,7 @@ function invim {
 
 # @name vims
 # @author Jeremy Grier <jeremy.grier@iostudo.com>
-# @description This function open vim with the specified session or the default session specified here
+# @description This function opens vim with the specified session or the default session specified here
 function vims {
 
   if [ -n "${1}" ]; then
@@ -28,3 +28,9 @@ function vims {
 
 }
 
+# @name vimg
+# @author Jeremy Grier <jeremy.grier@iostudo.com>
+# @description This function opens vim with git status following the close, this is not setup for the -p tables option
+function vimg {
+  vim "${1}" ; git status
+}

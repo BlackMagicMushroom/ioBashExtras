@@ -1,4 +1,5 @@
 # -- git -- ##
+#
 
 # @name gst
 # @author Jeremy Grier <jeremy.grier@iostudo.com>
@@ -114,5 +115,5 @@ function glno {
 
 ## -- branch functions -- ##
 function gba {
-  git branch -ar
+  git branch -ra
 }
