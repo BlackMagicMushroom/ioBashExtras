@@ -1,5 +1,6 @@
 # -- git -- ##
 #
+#
 
 # @name gst
 # @author Jeremy Grier <jeremy.grier@iostudo.com>
@@ -97,14 +98,24 @@ function gcc {
 function gdh { git diff HEAD "${1}" ; }  
 
 
-function gmo {
+function gml {
   if [ -n "${1}" ]; then
     branch="${1}"
   else
     branch="develop"
   fi
   ## -- run command -- ##
-  git merge origin/${branch}
+  git merge ${branch}
+}
+
+function gmo {
+  if [ -n "${1}" ]; then
+    origin_branch="${1}"
+  else
+    origin_branch="develop"
+  fi
+  ## -- run command -- ##
+  git merge ${origin_branch}
 }
 
 ## -- function git log --name-only -- ##
@@ -117,3 +128,41 @@ function glno {
 function gba {
   git branch -ra
 }
+
+function gam {
+  git add -- $( gst | grep "modified:" | rev | cut -f 1 -d " " | rev )
+}
+
+# -- bash completion
+_git_branch_ioxtras() 
+{
+    local cur prev opts base
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    #
+    #  The options found in the config/deploy/ directory.
+    #
+    case "${prev}" in
+      gml)
+        local branches=$( for x in $( git branch 2>/dev/null | sed 's/*//' ); do echo "${x}" ; done )
+        COMPREPLY=( $(compgen -W "${branches}" -- ${cur}) )
+        return 0
+        ;;
+    gmo)
+        local branches=$( for x in $( git branch -r 2>/dev/null | sed 's/(*|->)//' ); do echo "${x}" ; done )
+        COMPREPLY=( $(compgen -W "${branches}" -- ${cur}) )
+        return 0
+        ;;
+    gco)
+        local branches=$( for x in $( git branch 2>/dev/null | sed 's/*//' ); do echo "${x}" ; done )
+        COMPREPLY=( $(compgen -W "${branches}" -- ${cur}) )
+        return 0
+        ;;
+    esac
+}
+
+complete -F _git_branch_ioxtras gml
+complete -F _git_branch_ioxtras gmo
+complete -F _git_branch_ioxtras gco
