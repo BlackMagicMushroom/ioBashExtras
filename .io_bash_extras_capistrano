@@ -31,3 +31,23 @@ function capdr {
     fi
   cap "${application}" deploy:rollback
 }
+
+# -- bash completion
+_capd() 
+{
+    local cur prev opts base
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    #
+    #  The options found in the config/deploy/ directory.
+    #
+    local configs=$(for x in `ls -l config/deploy/*.rb 2>/dev/null | rev | awk '{ print $1 }' | rev | sed 's:config/deploy/\(.*\)\.rb:\1:'`; do echo ${x} ; done )
+    COMPREPLY=( $(compgen -W "${configs}" -- ${cur}) )
+    return 0
+}
+
+complete -F _capd capd
+complete -F _capd capdc
+complete -F _capd capds

@@ -1,0 +1,8 @@
+## -- functions that help with security and security settings
+#
+#
+gpw() {
+  local length=$1
+  [ "$length" == "" ] && length=16
+  tr -dc "A-Za-z0-9&^%$#@" < /dev/urandom | head -c ${length} | xargs
+}

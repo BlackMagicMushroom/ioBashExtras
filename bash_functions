@@ -27,4 +27,5 @@ include_function_file "/$HOME/ioBashExtras/.io_bash_extras_grep"
 include_function_file "/$HOME/ioBashExtras/.io_bash_extras_capistrano"
 include_function_file "/$HOME/ioBashExtras/.io_bash_extras_tar"
 include_function_file "/$HOME/ioBashExtras/.io_bash_extras_vim"
+include_function_file "/$HOME/ioBashExtras/.io_bash_extras_security"
 include_private_functions
