@@ -3,6 +3,6 @@
 #
 gpw() {
   local length=$1
-  [ "$length" == "" ] && length=16
+  [ -z "$length" ] && length=16 #-z cause Bill is awesome
   tr -dc "A-Za-z0-9&^%$#@" < /dev/urandom | head -c ${length} | xargs
 }
